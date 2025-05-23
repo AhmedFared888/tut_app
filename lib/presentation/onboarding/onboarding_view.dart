@@ -17,7 +17,7 @@ class OnboardingView extends StatefulWidget {
 class _OnboardingViewState extends State<OnboardingView> {
   late final List<SliderObject> _list = _getSliderData();
   final PageController _pageController = PageController();
-  int _curruntIndex = 0;
+  int _currentIndex = 0;
   List<SliderObject> _getSliderData() => [
         SliderObject(
           StringsManager.onBoardingTitle1,
@@ -55,10 +55,10 @@ class _OnboardingViewState extends State<OnboardingView> {
         itemCount: _list.length,
         onPageChanged: (index) {
           setState(() {
-            _curruntIndex = index;
+            _currentIndex = index;
           });
         },
-        itemBuilder: (contex, index) => OnBoardingPage(_list[index]),
+        itemBuilder: (context, index) => OnBoardingPage(_list[index]),
       ),
       bottomSheet: Container(
         color: ColorManager.white,
@@ -119,9 +119,9 @@ class OnBoardingPage extends StatelessWidget {
 }
 
 class SliderObject {
-  String title;
-  String subTitle;
-  String image;
+  final String title;
+  final String subTitle;
+  final String image;
 
   SliderObject(this.title, this.subTitle, this.image);
 }

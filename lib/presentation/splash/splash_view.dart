@@ -15,11 +15,11 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   Timer? _timer;
-  _startDelay() {
-    _timer = Timer(const Duration(seconds: AppConstants.splashDelay), _goNext);
+  void _startDelay() {
+    _timer = Timer(Duration(seconds: AppConstants.splashDelay), _goNext);
   }
 
-  _goNext() {
+  void _goNext() {
     Navigator.pushReplacementNamed(context, RoutesManager.onBoardingRoute);
   }
 

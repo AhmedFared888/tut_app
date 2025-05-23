@@ -1,4 +1,4 @@
-class AppStrings {
+class StringsManager {
   static const noRouteFounded = 'No Route Found';
   static const onBoardingTitle1 = 'SEE THE BEST COURSE #1';
   static const onBoardingTitle2 = 'SEE THE BEST COURSE #2';

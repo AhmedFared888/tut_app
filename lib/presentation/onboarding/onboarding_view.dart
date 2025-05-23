@@ -4,6 +4,8 @@ import 'package:tut_app/presentation/resources/assets_manager.dart';
 import 'package:tut_app/presentation/resources/color_manager.dart';
 import 'package:tut_app/presentation/resources/strings_manager.dart';
 
+import '../resources/valus_manager.dart';
+
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
 
@@ -17,23 +19,23 @@ class _OnboardingViewState extends State<OnboardingView> {
   int _curruntIndex = 0;
   List<SliderObject> _getSliderData() => [
         SliderObject(
-          AppStrings.onBoardingTitle1,
-          AppStrings.onBoardingSubTitle1,
+          StringsManager.onBoardingTitle1,
+          StringsManager.onBoardingSubTitle1,
           ImageAssets.onBoardingLogo1,
         ),
         SliderObject(
-          AppStrings.onBoardingTitle2,
-          AppStrings.onBoardingSubTitle2,
+          StringsManager.onBoardingTitle2,
+          StringsManager.onBoardingSubTitle2,
           ImageAssets.onBoardingLogo2,
         ),
         SliderObject(
-          AppStrings.onBoardingTitle3,
-          AppStrings.onBoardingSubTitle3,
+          StringsManager.onBoardingTitle3,
+          StringsManager.onBoardingSubTitle3,
           ImageAssets.onBoardingLogo3,
         ),
         SliderObject(
-          AppStrings.onBoardingTitle4,
-          AppStrings.onBoardingSubTitle4,
+          StringsManager.onBoardingTitle4,
+          StringsManager.onBoardingSubTitle4,
           ImageAssets.onBoardingLogo4,
         ),
       ];
@@ -55,8 +57,42 @@ class _OnboardingViewState extends State<OnboardingView> {
             _curruntIndex = index;
           });
         },
-        itemBuilder: (contex , index) => ,
+        itemBuilder: (contex, index) => const OnBoardingPage(),
       ),
+    );
+  }
+}
+
+class OnBoardingPage extends StatelessWidget {
+  final SliderObject _sliderObject;
+
+  const OnBoardingPage(this._sliderObject, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: AppSize.s70,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p8),
+          child: Text(
+            _sliderObject.title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.displayLarge,
+          ),
+        ),
+        Text(
+          _sliderObject.subTitle,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+        const SizedBox(
+          height: AppSize.s70,
+        ),
+      ],
     );
   }
 }

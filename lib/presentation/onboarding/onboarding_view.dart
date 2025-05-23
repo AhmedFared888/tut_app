@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tut_app/presentation/resources/assets_manager.dart';
 import 'package:tut_app/presentation/resources/color_manager.dart';
 import 'package:tut_app/presentation/resources/strings_manager.dart';
@@ -57,7 +58,26 @@ class _OnboardingViewState extends State<OnboardingView> {
             _curruntIndex = index;
           });
         },
-        itemBuilder: (contex, index) => const OnBoardingPage(),
+        itemBuilder: (contex, index) => OnBoardingPage(_list[index]),
+      ),
+      bottomSheet: Container(
+        color: ColorManager.white,
+        height: AppSize.s80,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text(
+                  StringsManager.skip,
+                  style: TextStyle(),
+                  textAlign: TextAlign.end,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -92,6 +112,7 @@ class OnBoardingPage extends StatelessWidget {
         const SizedBox(
           height: AppSize.s70,
         ),
+        SvgPicture.asset(_sliderObject.image),
       ],
     );
   }

@@ -51,6 +51,8 @@ ThemeData getAppTheme() {
     ),
     // text theme
     textTheme: TextTheme(
+      displayLarge:
+          getLightStyle(color: ColorManager.white, fontSize: FontSize.s22),
       headlineLarge: getsemiBoldStyle(
         color: ColorManager.darkGrey,
         fontSize: AppSize.s16,
@@ -59,8 +61,8 @@ ThemeData getAppTheme() {
         color: ColorManager.lightGrey,
         fontSize: AppSize.s14,
       ),
-      bodyMedium: getRegularStyle(color: ColorManager.grey),
-      bodySmall: getRegularStyle(color: ColorManager.lightGrey),
+      bodyLarge: getRegularStyle(color: ColorManager.grey1),
+      bodySmall: getRegularStyle(color: ColorManager.grey),
     ),
     // input decoration theme (text form field)
     inputDecorationTheme: InputDecorationTheme(

@@ -45,6 +45,8 @@ class _OnboardingViewState extends State<OnboardingView> {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
+        backgroundColor: ColorManager.white,
+        elevation: 0,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.white,
           statusBarBrightness: Brightness.dark,
@@ -69,17 +71,79 @@ class _OnboardingViewState extends State<OnboardingView> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: () {},
-                child: const Text(
+                child: Text(
                   StringsManager.skip,
-                  style: TextStyle(),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium
+                      ?.copyWith(color: ColorManager.primary),
                   textAlign: TextAlign.end,
                 ),
               ),
-            )
+            ),
+            _getBottomSheetWidget(),
           ],
         ),
       ),
     );
+  }
+
+  Widget _getBottomSheetWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // left arrow
+        Padding(
+          padding: const EdgeInsets.all(
+            AppPadding.p14,
+          ),
+          child: GestureDetector(
+            child: SizedBox(
+              width: 15,
+              height: 20,
+              child: SvgPicture.asset(
+                ImageAssets.leftArrowIc,
+              ),
+            ),
+          ),
+        ),
+
+        // circles indicator
+        Row(
+          children: [
+            for (int i = 1; i <= _list.length; i++)
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.p8),
+                child: _getProperCircle(i),
+              ),
+          ],
+        ),
+
+        // right arrow
+        Padding(
+          padding: const EdgeInsets.all(
+            AppPadding.p14,
+          ),
+          child: GestureDetector(
+            child: SizedBox(
+              width: 15,
+              height: 20,
+              child: SvgPicture.asset(
+                ImageAssets.rightArrowIc,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _getProperCircle(int index) {
+    if (index == _currentIndex) {
+      return SvgPicture.asset(ImageAssets.hollowCircleIc);
+    } else {
+      return SvgPicture.asset(ImageAssets.solidCircleIc);
+    }
   }
 }
 

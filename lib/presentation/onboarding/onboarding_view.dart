@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tut_app/presentation/resources/assets_manager.dart';
 import 'package:tut_app/presentation/resources/color_manager.dart';
+import 'package:tut_app/presentation/resources/constants_manager.dart';
+import 'package:tut_app/presentation/resources/routes_manager.dart';
 import 'package:tut_app/presentation/resources/strings_manager.dart';
 
 import '../resources/valus_manager.dart';
@@ -70,7 +72,10 @@ class _OnboardingViewState extends State<OnboardingView> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(
+                      (context), RoutesManager.loginRoute);
+                },
                 child: Text(
                   StringsManager.skip,
                   style: Theme.of(context)
@@ -98,6 +103,13 @@ class _OnboardingViewState extends State<OnboardingView> {
             AppPadding.p14,
           ),
           child: GestureDetector(
+            onTap: () {
+              // go to previouse slide
+              _pageController.animateToPage(_getPreviousIndex(),
+                  duration: const Duration(
+                      milliseconds: AppConstants.sliderAnimationTime),
+                  curve: Curves.bounceInOut);
+            },
             child: SizedBox(
               width: 15,
               height: 20,
@@ -111,7 +123,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         // circles indicator
         Row(
           children: [
-            for (int i = 1; i <= _list.length; i++)
+            for (int i = 0; i < _list.length; i++)
               Padding(
                 padding: const EdgeInsets.all(AppPadding.p8),
                 child: _getProperCircle(i),
@@ -125,6 +137,13 @@ class _OnboardingViewState extends State<OnboardingView> {
             AppPadding.p14,
           ),
           child: GestureDetector(
+            onTap: () {
+              // go to previouse slide
+              _pageController.animateToPage(_getNextIndex(),
+                  duration: const Duration(
+                      milliseconds: AppConstants.sliderAnimationTime),
+                  curve: Curves.bounceInOut);
+            },
             child: SizedBox(
               width: 15,
               height: 20,
@@ -144,6 +163,22 @@ class _OnboardingViewState extends State<OnboardingView> {
     } else {
       return SvgPicture.asset(ImageAssets.solidCircleIc);
     }
+  }
+
+  int _getPreviousIndex() {
+    int previousIndex = _currentIndex--;
+    if (previousIndex == -1) {
+      previousIndex = _list.length - 1;
+    }
+    return previousIndex;
+  }
+
+  int _getNextIndex() {
+    int nextIndex = _currentIndex++;
+    if (nextIndex == _list.length) {
+      nextIndex = 0;
+    }
+    return nextIndex;
   }
 }
 

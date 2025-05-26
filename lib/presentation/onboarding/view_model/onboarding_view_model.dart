@@ -24,18 +24,27 @@ class OnboardingViewModel extends BaseViewModel
   }
 
   @override
-  void goNext() {
-    // TODO: implement goNext
+  int goNext() {
+    int nextIndex = ++_currentIndex;
+    if (nextIndex == _list.length) {
+      nextIndex = 0;
+    }
+    return nextIndex;
   }
 
   @override
-  void goPrevious() {
-    // TODO: implement goPrevious
+  int goPrevious() {
+    int previousIndex = --_currentIndex;
+    if (previousIndex == -1) {
+      previousIndex = _list.length - 1;
+    }
+    return previousIndex;
   }
 
   @override
   void onPageChanged(int index) {
-    // TODO: implement onPageChanged
+    _currentIndex = index;
+    _postDataToView();
   }
 
   @override
@@ -77,8 +86,8 @@ class OnboardingViewModel extends BaseViewModel
 
 //orders that our view model will receive from view
 abstract class OnboardingViewModelInputs {
-  void goNext(); // when user clicks on right arrow  or swip left
-  void goPrevious(); //  when user clicks on left arrow  or swip right
+  int goNext(); // when user clicks on right arrow  or swip left
+  int goPrevious(); //  when user clicks on left arrow  or swip right
   void onPageChanged(int index);
 
   // stream controller input

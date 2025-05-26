@@ -8,7 +8,7 @@ import '../../resources/strings_manager.dart';
 
 class OnboardingViewModel extends BaseViewModel
     implements OnboardingViewModelInputs, OnboardingViewModelOutputs {
-  final StreamController _streamController =
+  final StreamController<SliderViewObject> _streamController =
       StreamController<SliderViewObject>();
   late final List<SliderObject> _list;
   int _currentIndex = 0;
@@ -53,12 +53,12 @@ class OnboardingViewModel extends BaseViewModel
 
   @override
   Stream<SliderViewObject> get outputSliderViewObject =>
-      _streamController.stream.map((sliderViewObject) => sliderViewObject);
+      _streamController.stream;
 
   // on boarding private functions
   void _postDataToView() {
-    inputSliderViewObject.add(SliderViewObject(_list[_currentIndex] as int,
-        _list.length, _currentIndex as SliderObject));
+    inputSliderViewObject.add(
+        SliderViewObject(_list[_currentIndex], _list.length, _currentIndex));
   }
 
   List<SliderObject> _getSliderData() => [

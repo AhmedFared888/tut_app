@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:tut_app/presentation/base/base_view_model.dart';
 import 'package:tut_app/presentation/resources/assets_manager.dart';
 import 'package:tut_app/presentation/resources/color_manager.dart';
 import 'package:tut_app/presentation/resources/constants_manager.dart';
 import 'package:tut_app/presentation/resources/routes_manager.dart';
 import 'package:tut_app/presentation/resources/strings_manager.dart';
 
+import '../../../domain/models.dart';
 import '../../resources/valus_manager.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -17,31 +19,8 @@ class OnboardingView extends StatefulWidget {
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
-  late final List<SliderObject> _list = _getSliderData();
   final PageController _pageController = PageController();
-  int _currentIndex = 0;
-  List<SliderObject> _getSliderData() => [
-        SliderObject(
-          StringsManager.onBoardingTitle1,
-          StringsManager.onBoardingSubTitle1,
-          ImageAssets.onBoardingLogo1,
-        ),
-        SliderObject(
-          StringsManager.onBoardingTitle2,
-          StringsManager.onBoardingSubTitle2,
-          ImageAssets.onBoardingLogo2,
-        ),
-        SliderObject(
-          StringsManager.onBoardingTitle3,
-          StringsManager.onBoardingSubTitle3,
-          ImageAssets.onBoardingLogo3,
-        ),
-        SliderObject(
-          StringsManager.onBoardingTitle4,
-          StringsManager.onBoardingSubTitle4,
-          ImageAssets.onBoardingLogo4,
-        ),
-      ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,6 +145,12 @@ class _OnboardingViewState extends State<OnboardingView> {
     } else {
       return SvgPicture.asset(ImageAssets.solidCircleIc);
     }
+  }
+
+  @override
+  void dispose() {
+    // viewmodel.dispose
+    super.dispose();
   }
 
   int _getPreviousIndex() {

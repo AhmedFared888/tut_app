@@ -8,7 +8,7 @@ import 'package:tut_app/presentation/resources/constants_manager.dart';
 import 'package:tut_app/presentation/resources/routes_manager.dart';
 import 'package:tut_app/presentation/resources/strings_manager.dart';
 
-import '../../../domain/models.dart';
+import '../../../domain/models/models.dart';
 import '../../resources/valus_manager.dart';
 
 class OnboardingView extends StatefulWidget {

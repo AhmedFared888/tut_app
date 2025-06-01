@@ -36,6 +36,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^2.1.0
+  internet_connection_checker: ^3.0.1
   json_serializable: ^6.9.5
   retrofit: ^4.4.2
   retrofit_generator: ^9.2.0

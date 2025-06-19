@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:tut_app/data/data_source/remote_data_source.dart';
 import 'package:tut_app/data/mapper/mapper.dart';
+import 'package:tut_app/data/network/error_handler.dart';
 import 'package:tut_app/data/network/failure.dart';
 import 'package:tut_app/data/network/network_info.dart';
 import 'package:tut_app/data/network/requests.dart';
@@ -16,21 +17,26 @@ class RepositoryImpl implements Repo {
       LoginRequest loginRequest) async {
     if (await _networkInfo.isConnected) {
       // its connected to internet, its safe to call API
-      final Response = await _remoteDataSource.login(loginRequest);
-      if (Response.status == 0) {
-        // success
-        // return either right
-        // return data
-        return right(Response.toDomain());
-      } else {
-        // failuer -- return business error
-        // return either left
-        return left(Failure(409, Response.message ?? 'business error message'));
+      try {
+        final Response = await _remoteDataSource.login(loginRequest);
+        if (Response.status == ApiInternalStatus.SUCCESS) {
+          // success
+          // return either right
+          // return data
+          return right(Response.toDomain());
+        } else {
+          // failuer -- return business error
+          // return either left
+          return left(Failure(ApiInternalStatus.FAILURE,
+              Response.message ?? ResponseMessage.DEFAULT));
+        }
+      } catch (error) {
+        return left(ErrorHandler.handle(error).failure);
       }
     } else {
       // return internet connection error
       // return either left
-      return left(Failure(501, 'please check your internet'));
+      return left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }

@@ -1,4 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:tut_app/app/constants.dart';
 
 const String APPLICATION_JSON = 'application/json';
@@ -26,6 +28,16 @@ class DioFactory {
       receiveTimeout: Duration(milliseconds: _timeOut),
       sendTimeout: Duration(milliseconds: _timeOut),
     );
+
+    if (kReleaseMode) {
+      print('No logs in Release Mode');
+    } else {
+      dio.interceptors.add(PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseHeader: true,
+      ));
+    }
     return dio;
   }
 }

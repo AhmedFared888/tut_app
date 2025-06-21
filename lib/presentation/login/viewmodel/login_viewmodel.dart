@@ -29,10 +29,15 @@ class LoginViewmodel extends BaseViewModel
   login() {}
 
   @override
-  setPassword(String password) {}
+  setPassword(String password) {
+    inputPassword.add(password);
+  }
 
   @override
-  setUserName(String userName) {}
+  setUserName(String userName) {
+    inputUserName.add(userName);
+  }
+
   // outputs
   @override
   Stream<bool> get outputIsPasswordValid => _passWordStreamController.stream

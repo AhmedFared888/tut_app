@@ -4,7 +4,7 @@ const String ARABIC = 'ar';
 const String ENGLISH = 'en';
 
 extension LanguageTypeExtension on LanguageType {
-  String getLanguage() {
+  String getValue() {
     switch (this) {
       case LanguageType.ENGLISH:
         return ENGLISH;

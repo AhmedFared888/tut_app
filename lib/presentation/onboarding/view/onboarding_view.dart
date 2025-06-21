@@ -21,6 +21,7 @@ class OnboardingView extends StatefulWidget {
 class _OnboardingViewState extends State<OnboardingView> {
   final PageController _pageController = PageController();
   final OnboardingViewModel _onboardingViewModel = OnboardingViewModel();
+
   _bind() {
     _onboardingViewModel.start();
   }

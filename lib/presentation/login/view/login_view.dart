@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tut_app/presentation/resources/color_manager.dart';
+import 'package:tut_app/presentation/resources/strings_manager.dart';
 import 'package:tut_app/presentation/resources/valus_manager.dart';
 
 import '../../resources/assets_manager.dart';
@@ -60,10 +61,38 @@ class _LoginViewState extends State<LoginView> {
                       return TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         controller: _userNameController,
+                        decoration: InputDecoration(
+                            hintText: StringsManager.userName,
+                            labelText: StringsManager.userName,
+                            errorText: (snapshot.data ?? true)
+                                ? null
+                                : StringsManager.userNameError),
                       );
                     },
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: AppSize.s20,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: AppPadding.p48),
+                  child: StreamBuilder<bool>(
+                    stream: _viewModel.outputIsPasswordValid,
+                    builder: (context, snapshot) {
+                      return TextFormField(
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                            hintText: StringsManager.password,
+                            labelText: StringsManager.password,
+                            errorText: (snapshot.data ?? true)
+                                ? null
+                                : StringsManager.passwordError),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

@@ -14,4 +14,11 @@ class StringsManager {
   static const onBoardingSubTitle4 =
       'Tut app is an awesome flutter application using clean architecture #4';
   static const skip = 'Skip';
+  static const userName = 'Username';
+  static const password = 'Password';
+  static const login = 'Login';
+  static const userNameError = 'Please enter your Username';
+  static const passwordError = 'Please enter your Password';
+  static const forgetPassword = 'Forget password';
+  static const registerText = 'Not a member ? Sign up';
 }

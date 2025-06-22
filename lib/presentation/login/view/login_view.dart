@@ -4,6 +4,7 @@ import 'package:tut_app/presentation/resources/strings_manager.dart';
 import 'package:tut_app/presentation/resources/valus_manager.dart';
 
 import '../../resources/assets_manager.dart';
+import '../../resources/routes_manager.dart';
 import '../viewmodel/login_viewmodel.dart';
 
 class LoginView extends StatefulWidget {
@@ -14,7 +15,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewmodel _viewModel = LoginViewmodel(_loginUseCase);
+  final LoginViewmodel _viewModel = LoginViewmodel();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -35,14 +36,14 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return _getContentWidget();
   }
 
   Widget _getContentWidget() {
     return Scaffold(
+      backgroundColor: ColorManager.white,
       body: Container(
-        padding: const EdgeInsets.only(top: AppPadding.p85),
-        color: ColorManager.white,
+        padding: const EdgeInsets.only(top: AppPadding.p155),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -50,11 +51,11 @@ class _LoginViewState extends State<LoginView> {
               children: [
                 Center(child: Image.asset(ImageAssets.splashLogo)),
                 const SizedBox(
-                  height: AppSize.s40,
+                  height: AppSize.s48,
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: AppPadding.p48),
+                      const EdgeInsets.symmetric(horizontal: AppPadding.p30),
                   child: StreamBuilder<bool>(
                     stream: _viewModel.outputIsUserNameValid,
                     builder: (context, snapshot) {
@@ -72,11 +73,11 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.s20,
+                  height: AppSize.s30,
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: AppPadding.p48),
+                      const EdgeInsets.symmetric(horizontal: AppPadding.p30),
                   child: StreamBuilder<bool>(
                     stream: _viewModel.outputIsPasswordValid,
                     builder: (context, snapshot) {
@@ -94,25 +95,66 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ),
                 const SizedBox(
-                  height: AppSize.s48,
+                  height: AppSize.s70,
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: AppPadding.p48),
+                      const EdgeInsets.symmetric(horizontal: AppPadding.p30),
                   child: StreamBuilder<bool>(
                     stream: _viewModel.outputAreAllInputsValid,
                     builder: (context, snapshot) {
-                      return ElevatedButton(
-                        onPressed: (snapshot.data ?? false)
-                            ? () {
-                                _viewModel.login();
-                              }
-                            : null,
-                        child: const Text(
-                          StringsManager.login,
+                      return SizedBox(
+                        width: double.infinity,
+                        height: AppSize.s40,
+                        child: ElevatedButton(
+                          onPressed: (snapshot.data ?? false)
+                              ? () {
+                                  _viewModel.login();
+                                }
+                              : null,
+                          child: const Text(
+                            StringsManager.login,
+                          ),
                         ),
                       );
                     },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppPadding.p20,
+                    vertical: AppPadding.p8,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              (context), RoutesManager.forgetPasswordRoute);
+                        },
+                        child: Text(
+                          StringsManager.forgetPassword,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(color: ColorManager.primary),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                              (context), RoutesManager.registerRoute);
+                        },
+                        child: Text(
+                          StringsManager.registerText,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge
+                              ?.copyWith(color: ColorManager.primary),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

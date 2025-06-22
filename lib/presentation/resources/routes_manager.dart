@@ -12,7 +12,7 @@ class RoutesManager {
   static const String splashRoute = '/';
   static const String loginRoute = '/login';
   static const String registerRoute = '/register';
-  static const String forgetPasswordhRoute = '/forgetPassword';
+  static const String forgetPasswordRoute = '/forgetPassword';
   static const String mainRoute = '/main';
   static const String storeDetailsRoute = '/storeDetails';
   static const String onBoardingRoute = '/onBoarding';
@@ -27,7 +27,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const LoginView());
       case RoutesManager.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterView());
-      case RoutesManager.forgetPasswordhRoute:
+      case RoutesManager.forgetPasswordRoute:
         return MaterialPageRoute(builder: (_) => const ForgetPasswordView());
       case RoutesManager.mainRoute:
         return MaterialPageRoute(builder: (_) => const MainView());

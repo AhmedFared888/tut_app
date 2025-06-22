@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:tut_app/presentation/base/base_view_model.dart';
 import 'package:tut_app/presentation/common/freezed_data_classes.dart';
 
+import '../../../domain/usecase/login_usecase.dart';
+
 class LoginViewmodel extends BaseViewModel
     implements LoginViewmodelInputs, LoginViewmodelOutputs {
   final StreamController _userNameStreamController = StreamController<
@@ -13,8 +15,8 @@ class LoginViewmodel extends BaseViewModel
       StreamController<void>.broadcast();
 
   var loginObject = LoginObject("", "");
-  // final LoginUsecase _loginUsecase;
-  // LoginViewmodel(this._loginUsecase);
+  final LoginUsecase _loginUsecase;
+  LoginViewmodel(this._loginUsecase);
 
   // inputs
   @override
@@ -38,15 +40,15 @@ class LoginViewmodel extends BaseViewModel
 
   @override
   login() async {
-    // (await _loginUsecase.execute(
-    //         LoginUsecaseInput(loginObject.userName, loginObject.password)))
-    //     .fold(
-    //         (left) => {
-    //               // left -> failure
-    //             },
-    //         (R) => {
-    //               // right -> success
-    //             });
+    (await _loginUsecase.execute(
+            LoginUsecaseInput(loginObject.userName, loginObject.password)))
+        .fold(
+            (left) => {
+                  // left -> failure
+                },
+            (R) => {
+                  // right -> success
+                });
   }
 
   @override

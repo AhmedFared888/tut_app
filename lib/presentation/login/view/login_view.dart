@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:tut_app/data/repository/repository_impl.dart';
 import 'package:tut_app/presentation/resources/color_manager.dart';
 import 'package:tut_app/presentation/resources/strings_manager.dart';
 import 'package:tut_app/presentation/resources/valus_manager.dart';
 
+import '../../../domain/repos/repo.dart';
+import '../../../domain/usecase/login_usecase.dart';
 import '../../resources/assets_manager.dart';
 import '../../resources/routes_manager.dart';
 import '../viewmodel/login_viewmodel.dart';
@@ -15,7 +18,9 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final LoginViewmodel _viewModel = LoginViewmodel();
+  Repo _repo = RepositoryImpl(_remoteDataSource, _networkInfo) 
+  final LoginUsecase _loginUseCase = LoginUsecase(_repo);
+  final LoginViewmodel _viewModel = LoginViewmodel(_loginUseCase);
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
